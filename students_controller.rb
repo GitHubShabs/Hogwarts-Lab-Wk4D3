@@ -4,47 +4,44 @@ require_relative('models/student')
 require_relative('models/house')
 also_reload('./models/*')
 
-# index
+
+# *****index*****
 get '/students' do # index
   @students = Student.all()
   erb( :index )
 end
 
-# new
+# ****new****
 get '/students/new' do # new
   erb( :new )
 end
 
-# create
+# ****create****
 post '/students' do # create
   @student = Student.new( params )
   @student.save()
   erb( :create )
 end
 
-
-# show
+# ****show****
 get '/students/:id' do # show
   @student = Student.find( params[:id] )
   erb( :show )
 end
 
-
-# update
+# ****update****
 post '/students/:id' do # update
   Student.new( params ).update
   redirect to '/students'
 end
 
-
-# edit
+# ****edit****
 get '/students/:id/edit' do # edit
   @student = Student.find( params[:id] )
   erb( :edit )
 end
 
-
-# destroy
+# ****destroy****
 post '/students/:id/delete' do # delete a specific pizza in params
   student = Student.find( params[:id] )
   student.delete()
